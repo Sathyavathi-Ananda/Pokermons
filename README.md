@@ -34,7 +34,7 @@ Handled basic UT'S  and UT'S are written in JASMIN
 
 ## not coverd:due to time constraint
 1. Page refresh should maintain the sorting and search related data. 
-        way to do: " we can store  the latest value of search and sort  in local storage and get the values when page is refreshed
+        way to do: " we can store  the latest value of search and sort  in local storage and get the values when page is refreshed(in ngOnInit or constructor)
 2. User should be taken to the details page and present all the information available for
 that Pokémon. The user should have a link to go back to the previous page.
     way to do: capture selected postmmon details and make link to each postmon and pass the data to the next screen and show back button
