@@ -1,1 +1,53 @@
-<p>home works!</p>
+<!-- Show Loading symbol if there are no pokemon or all  haven't loaded-->
+<div class="loading" *ngIf="!pokemonsLoaded">
+    <mat-spinner></mat-spinner>
+    LOADING POKEMON....
+  </div>
+
+<div class="my-2 select-page-size">
+  <label> Select Page Size </label>
+  <select (change)="onChange($event?.target)">
+      <option [value]="10" selcetedValue="10">10</option>
+      <option [value]="20" selcetedValue="20">20</option>
+      <option [value]="50" selcetedValue="50">50</option>
+  </select>
+  <div class="pagination col-md-12">
+    <pagination-controls (pageChange)="page=$event;pokemonsList=[];getPokemons()"></pagination-controls>
+</div>
+</div>
+
+  <div style="text-align:center">
+    <div class="grid-layout" *ngIf="pokemonsLoaded && pokemonsList">
+        
+      <div
+        *ngFor="let pokemon of pokemonsList |  paginate:{itemsPerPage:selcetedValue,currentPage:page,totalItems:totalPokemons}  |typeFilter: typeFilters |search:query ">
+        <mat-card class="pokemon-card" >
+          <mat-card-title>{{ pokemon.name | titlecase }}</mat-card-title>
+          <div class="id">{{ pokemon.id }}</div>
+          <div class="background-image">
+            <img
+              mat-card-image
+              [src]="pokemon.sprites.other['official-artwork'].front_default" alt="Pokemon"
+              alt="photo of {{ pokemon.name }}"
+            />
+          </div>
+          <mat-card-content>
+            <div class="form-group">
+                <label for="height">Height:</label>
+                {{pokemon.height}}
+            </div>
+            <div class="form-group">
+                <label for="Weight">Weight:</label>
+                {{pokemon.weight}}
+            </div>
+            <div class="form-group">
+                <label  for="abilities">Abilities:</label>
+                <ul *ngFor="let ability of pokemon.abilities">
+                    <li >{{ability.ability.name}}</li>
+                </ul>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>

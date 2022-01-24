@@ -1,1 +1,13 @@
-<app-header></app-header>
+<app-header [pokemons]="pokemons"
+(searchChange)="newPokemonSearch($event)"
+(typeSelected)="newTypeSelected($event)"
+></app-header>
+
+<app-home (exportPokemons)="exportPokemons($event)"
+[search]="search"
+[typeFilter]="typeFilter"
+
+  >
+</app-home>
+
+<router-outlet></router-outlet>
